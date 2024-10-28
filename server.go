@@ -7,11 +7,11 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/stripe/stripe-go/v80"
 	"github.com/stripe/stripe-go/v80/paymentintent"
 )
-
 
 // "The maximum lenght of a function is inversely proportional to the complexity and indentation level of that function"
 // Never try to explain How your code works in a comment
@@ -19,7 +19,7 @@ import (
 
 func main() {
 
-	stripe.Key = "sk_test_51OJVxhBfYy21A59VIBTOCXFU0UvhJ2UnQgDRPy4OWAR872vq2gGwD3sNhpIpUs1vJGSd5fsusfxZ0DsVbfLs6gxd00fmuWFMwM"
+	stripe.Key = os.Getenv("STRIPE_SECRET_KEY")
 
 	http.HandleFunc("/create-payment-intent", handleCreatePaymentIntent)
 	http.HandleFunc("/health", handleHealth)
